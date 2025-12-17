@@ -25,7 +25,7 @@ HetznerSubnets = 'Subnets/IPv4/hetzner.lst'
 OVHSubnets = 'Subnets/IPv4/ovh.lst'
 DigitalOceanSubnets = 'Subnets/IPv4/digitalocean.lst'
 CloudfrontSubnets = 'Subnets/IPv4/cloudfront.lst'
-ExcludeServices = {"telegram.lst", "cloudflare.lst", "google_ai.lst", "google_play.lst", 'hetzner.lst', 'ovh.lst', 'digitalocean.lst', 'cloudfront.lst', 'hodca.lst'}
+ExcludeServices = {"telegram.lst", "cloudflare.lst", "google_ai.lst", 'hetzner.lst', 'ovh.lst', 'digitalocean.lst', 'cloudfront.lst', 'hodca.lst'}
 
 def raw(src, out):
     domains = set()
@@ -451,23 +451,6 @@ if __name__ == '__main__':
     clashx(outside_lists, rusDomainsOutsideOut)
     kvas(outside_lists, rusDomainsOutsideOut)
     mikrotik_fwd(outside_lists, rusDomainsOutsideOut)
-
-    # Ukraine
-    Path("Ukraine").mkdir(parents=True, exist_ok=True)
-
-    urllib.request.urlretrieve("https://uablacklist.net/domains.txt", "uablacklist-domains.lst")
-    urllib.request.urlretrieve("https://raw.githubusercontent.com/zhovner/zaborona_help/master/config/domainsdb.txt", "zaboronahelp-domains.lst")
-
-    ua_lists = ['uablacklist-domains.lst', 'zaboronahelp-domains.lst', uaDomainsSrc]
-    
-    raw(ua_lists, uaDomainsOut)
-    dnsmasq(ua_lists, uaDomainsOut)
-    clashx(ua_lists, uaDomainsOut)
-    kvas(ua_lists, uaDomainsOut)
-    mikrotik_fwd(ua_lists, uaDomainsOut)
-
-    for temp_file in ['uablacklist-domains.lst', 'zaboronahelp-domains.lst']:
-        Path(temp_file).unlink()
 
     # Sing-box ruleset main
     russia_inside = domains_from_file('Russia/inside-raw.lst')
