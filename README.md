@@ -2,6 +2,10 @@
 
 Зарубежные сервисы пусть знают, что их ресурсы никому не нужны и мы сами у себя их блокируем!
 
+# Запуск
+$ docker build -t domains-updater .
+$ docker run -v "$(pwd):/app" domains-updater
+
 # Форматы списков
 - Dnsmasq nfset. Для Dnsmasq в формате nftables set (OpenWrt >=23.05) `nftset=/showip.net/4#inet#fw4#vpn_domains`
 - Dnsmasq ipset. Для Dnsmasq в формате ipset (OpenWrt <= 21.02) `ipset=/showip.net/vpn_domains` 
